@@ -2,8 +2,7 @@ package student;
 
 public class Assignment01Tester {
 
-	public Group group;
-	public Student student;
+	private Group group;
 
 	public void createGroup(int i) {
 		group = new Group(i);
