@@ -3,6 +3,8 @@ package student;
 public class Main {
 
     public static void main(String[] args) {
-    	System.out.println("Good luck, have fun!");
+        Group students = new Group(12);
+        students.getSize();
     }
+
 }
