@@ -33,4 +33,12 @@ public class Student {
         return this.sNumber;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
 }
