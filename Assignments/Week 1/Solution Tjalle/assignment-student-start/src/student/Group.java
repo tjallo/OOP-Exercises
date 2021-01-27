@@ -20,7 +20,7 @@ public class Group {
     public String toString() {
         String s = "";
         for (Student student : students) {
-            if (s != null) {
+            if (student != null) {
                 s += student.toString() + "\n";
             }
         }

@@ -14,7 +14,10 @@ public class Student {
     @Override
     public String toString() {
         // Lucy Liddels, s42
-        return firstName + " " + lastName + ", s" + String.valueOf(sNumber);
+        if (firstName != null) {
+            return firstName + " " + lastName + ", s" + String.valueOf(sNumber);
+        }
+        return "";
     }
 
     public void setFirstName(String firstName) {
