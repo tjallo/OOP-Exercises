@@ -1,14 +1,36 @@
 package student;
 
 public class Student {
-    private String name;
-    private String familyname;
-    private int studentnumber;
+    private String firstName;
+    private String lastName;
+    private int sNumber;
 
-    public Student(String name, String familyname, int studentnumber) {
-        this.name = name;
-        this.familyname = familyname;
-        this.studentnumber = studentnumber;
+    public Student(int sNumber, String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.sNumber = sNumber;
     }
-    
+
+    @Override
+    public String toString() {
+        // Lucy Liddels, s42
+        return firstName + " " + lastName + ", s" + String.valueOf(sNumber);
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void set_sNumber(int sNumber) {
+        this.sNumber = sNumber;
+    }
+
+    public int get_sNumber() {
+        return this.sNumber;
+    }
+
 }
