@@ -6,11 +6,9 @@ public class Main {
 		String word = file.getWord();
 		// System.out.println(word);
 
-		Gallows gallow = new Gallows(word);
+		GallowsUI game = new GallowsUI();
 
-		gallow.printWord();
-		gallow.guessLetter('a');
-		gallow.guessLetter('e');
-		System.out.println(gallow.getWordSoFar());
+		game.Play();
+
 	}
 }
