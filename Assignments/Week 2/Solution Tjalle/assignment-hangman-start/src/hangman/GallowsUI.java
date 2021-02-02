@@ -30,6 +30,5 @@ public class GallowsUI {
         return word;
     }
 
-    private 
 
 }
