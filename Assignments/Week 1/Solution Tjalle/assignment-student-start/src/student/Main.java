@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 /**
  * @author Tjalle Wolterink
+ * @author Pieter van den Wildenberg
  */
 
 public class Main {
