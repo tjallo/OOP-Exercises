@@ -37,10 +37,10 @@ public class Gallows {
     }
 
     /**
-     * Prints the word that has to be guessed
+     * returns the word that has to be guessed
      */
-    public void printWord() {
-        System.out.println(word);
+    public String getWord() {
+        return word;
     }
 
     /**
@@ -112,6 +112,14 @@ public class Gallows {
         }
 
         return result.toString();
+    }
+
+    /**
+     * Return the guessed letters as an array list
+     * @return
+     */
+    public ArrayList<Character> getGuessedLettersArrayList() {
+        return guessedLetters;
     }
 
     /**
