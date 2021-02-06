@@ -61,7 +61,16 @@ public class GallowsUI {
     private void guessTry(Scanner scanner) {
 
         printState();
-        char guess = scanner.nextLine().charAt(0);
+
+        char guess;
+        try {
+            guess = scanner.nextLine().charAt(0);
+        } catch (StringIndexOutOfBoundsException e) {
+            System.out.println("Please enter a valid character, your guess for this turn will be a space.");
+            guess = ' ';
+        }
+        
+
         gallow.guessLetter(guess);
 
         checkMistake(wordSoFar, gallow.getWordSoFar());
