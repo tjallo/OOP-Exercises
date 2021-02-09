@@ -122,9 +122,9 @@ public class GeometricTI {
 
             Geometric g = shapes.get(index);
 
-            System.out.print("Move by dx: ");
+            System.out.print("Move by dX: ");
             dx = scanner.nextDouble();
-            System.out.print("Move by dy: ");
+            System.out.print("Move by dY: ");
             dy = scanner.nextDouble();
 
             double orgX = g.getXval();
@@ -163,6 +163,7 @@ public class GeometricTI {
 
     private void sort() {
         char c;
+        // TODO: Implement function
     }
 
 }
