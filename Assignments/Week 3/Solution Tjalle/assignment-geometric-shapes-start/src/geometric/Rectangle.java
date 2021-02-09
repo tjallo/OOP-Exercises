@@ -42,9 +42,4 @@ public class Rectangle implements Geometric {
                 + " It has an area of " + Double.toString(area());
     }
 
-    @Override
-    public int compareTo(Geometric s) {
-        return 0;
-    }
-
 }

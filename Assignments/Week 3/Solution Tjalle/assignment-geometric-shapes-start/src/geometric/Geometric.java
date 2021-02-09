@@ -1,6 +1,6 @@
 package geometric;
 
-public interface Geometric extends Comparable<Geometric>{
+public interface Geometric {
 
     public double leftBorder();
 
@@ -16,5 +16,4 @@ public interface Geometric extends Comparable<Geometric>{
 
     public String toString();
 
-    // public int compareTo();
 }

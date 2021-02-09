@@ -35,9 +35,5 @@ public class Circle implements Geometric {
         y += dy;
     }
 
-    // @Override
-    // public String toString() {
-    //     return "This circle is at postion x: " + Double.toString(x) + ", y: " + Double.toString(y)
-    //             + " It has a radius of: " + Double.toString(r) + " It has an area of " + Double.toString(area());
-    // }
+    
 }
