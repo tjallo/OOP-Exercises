@@ -16,4 +16,8 @@ public interface Geometric {
 
     public String toString();
 
+    public double getXval();
+
+    public double getYval();
+
 }

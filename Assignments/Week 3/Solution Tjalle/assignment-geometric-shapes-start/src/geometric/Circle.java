@@ -35,5 +35,18 @@ public class Circle implements Geometric {
         y += dy;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Type: Circle, xPos: " + Double.toString(x) + ", yPos: " + Double.toString(y) + ", Radius: "
+                + Double.toString(r) + ", Area: " + Double.toString(area());
+    }
+
+    public double getXval() {
+        return x;
+    }
+
+    public double getYval() {
+        return y;
+    }
+
 }

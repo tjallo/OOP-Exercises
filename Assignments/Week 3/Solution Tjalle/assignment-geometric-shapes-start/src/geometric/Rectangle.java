@@ -37,9 +37,17 @@ public class Rectangle implements Geometric {
 
     @Override
     public String toString() {
-        return "This Rectangle is at postion x: " + Double.toString(x) + ", y: " + Double.toString(y)
-                + " It has a width of " + Double.toString(width) + " and a height of " + Double.toString(height)
-                + " It has an area of " + Double.toString(area());
+        return "Type: Rectangle, xPos: " + Double.toString(x) + ", yPos: " + Double.toString(y) + ", Width: "
+                + Double.toString(width) + ", Heigth: " + Double.toString(height) + ", Area: "
+                + Double.toString(area());
+    }
+
+    public double getXval() {
+        return x;
+    }
+
+    public double getYval() {
+        return y;
     }
 
 }
