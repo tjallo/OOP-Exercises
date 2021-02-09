@@ -1,12 +1,11 @@
 package geometric;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class GeometricTI {
 
-    private ArrayList<Geometric> shapes = new ArrayList<Geometric>();
-    private Sort sorter = new Sort();
+    private Geometric[] shapes;
     private Scanner scanner;
 
     public GeometricTI() {
@@ -59,7 +58,7 @@ public class GeometricTI {
     }
 
     private void show() {
-        if (shapes.size() < 1) {
+        if (shapes.length < 1) {
             System.out.println("The shape array is empty.");
         } else {
             printEntries();
@@ -69,8 +68,8 @@ public class GeometricTI {
     }
 
     private void printEntries() {
-        for (int i = 0; i < shapes.size(); i++) {
-            Geometric g = shapes.get(i);
+        for (int i = 0; i < shapes.length; i++) {
+            Geometric g = shapes[i];
             System.out.println(Integer.toString(i) + ": " + g.toString());
         }
     }
@@ -86,7 +85,7 @@ public class GeometricTI {
         r = scanner.nextDouble();
 
         Circle c = new Circle(x, y, r);
-        shapes.add(c);
+        addToArray(c);
 
         System.out.println("Added circle: " + c.toString());
 
@@ -107,8 +106,7 @@ public class GeometricTI {
         heigth = scanner.nextDouble();
 
         Rectangle r = new Rectangle(x, y, width, heigth);
-        shapes.add(r);
-
+        addToArray(r);
         System.out.println("Added rectangle: " + r.toString());
 
         start();
@@ -117,14 +115,14 @@ public class GeometricTI {
     private void move() {
         double dx, dy;
 
-        if (shapes.size() < 1) {
+        if (shapes.length < 1) {
             System.out.println("The array is  empty. You can't move any items.");
         } else {
             printEntries();
             System.out.print("Enter the index of the item you want moved: ");
             int index = scanner.nextInt();
 
-            Geometric g = shapes.get(index);
+            Geometric g = shapes[index];
 
             System.out.print("Move by dX: ");
             dx = scanner.nextDouble();
@@ -139,7 +137,7 @@ public class GeometricTI {
             double newX = g.getXval();
             double newY = g.getYval();
 
-            shapes.set(index, g);
+            shapes[index] = g;
 
             System.out.println("Moved Shape at index " + Integer.toString(index) + " from [" + Double.toString(orgX)
                     + "," + Double.toString(orgY) + "] to [" + Double.toString(newX) + "," + Double.toString(newY)
@@ -151,24 +149,42 @@ public class GeometricTI {
 
     private void remove() {
 
-        if (shapes.size() < 1) {
+        if (shapes.length < 1) {
             System.out.println("The array is already empty. You can't remove any items.");
         } else {
             printEntries();
             System.out.print("Enter the index of the item you want removed: ");
             int index = scanner.nextInt();
-            Geometric removed = shapes.get(index);
-            shapes.remove(index);
+            Geometric removed = shapes[index];
+            removeFromArray(index);
             System.out.println("Removed: " + removed.toString());
         }
 
         start();
     }
 
+    private void addToArray(Geometric g) {
+        if (shapes == null) {
+            shapes = new Geometric[1];
+            shapes[0] = g;
+        } else {
+            shapes = Arrays.copyOf(shapes, shapes.length + 1);
+            shapes[shapes.length - 1] = g;
+        }
+
+    }
+
+    private void removeFromArray(int element){
+        Geometric[] tempArr = new Geometric[shapes.length - 1];
+        System.arraycopy(shapes, 0, tempArr, 0, element );
+        System.arraycopy(shapes, element+1, tempArr, element, shapes.length - element-1);
+        shapes = tempArr;
+    }
+
     private void sort() {
-        if (shapes.size() < 1) {
+        if (shapes.length < 1) {
             System.out.println("The array is empty. You can't sort an empty array.");
-        } else if (shapes.size() == 1) {
+        } else if (shapes.length == 1) {
             System.out.println("The array only has one entry, sorting wil have no effect.");
         } else {
             System.out.println("Sort by:\nx values: x\ny values: y\narea: a");
@@ -189,11 +205,11 @@ public class GeometricTI {
                 System.out.println("Sorted by y values");
 
             } else {
-                shapes = sorter.sortByArea(shapes);
+                Arrays.sort(shapes);
                 System.out.println("Sorted by Area.");
             }
         } else {
-            shapes = sorter.sortByArea(shapes);
+            Arrays.sort(shapes);
             System.out.println("Sorted by Area.");
         }
         printEntries();
