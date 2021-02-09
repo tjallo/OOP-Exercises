@@ -7,9 +7,11 @@ public class Assignment03Tester {
 	private Rectangle r;
 
 	private ArrayList<Geometric> shapes;
+	private Sort sorter;
 
 	public Assignment03Tester() {
 		shapes = new ArrayList<Geometric>();
+		sorter = new Sort();
 	}
 
 	public void createCircle(double x, double y, double r) {
@@ -53,6 +55,9 @@ public class Assignment03Tester {
 	}
 
 	public void sortByArea() {
+
+		shapes = sorter.sortByArea(shapes);
+
 	}
 
 	public void sortByX() {

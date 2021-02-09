@@ -20,4 +20,8 @@ public interface Geometric {
 
     public double getYval();
 
+    public int compareTo(Geometric g);
+
+    
+
 }

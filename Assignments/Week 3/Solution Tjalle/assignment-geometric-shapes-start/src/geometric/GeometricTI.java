@@ -6,11 +6,12 @@ import java.util.Scanner;
 public class GeometricTI {
 
     private ArrayList<Geometric> shapes = new ArrayList<Geometric>();
+    private Sort sorter = new Sort();
     private Scanner scanner;
 
     public GeometricTI() {
         scanner = new Scanner(System.in);
-        System.out.println("Available commands:\nquit\nshow\ncircle\nrectangle\nmove\nremove");
+        System.out.println("Available commands:\nquit\nshow\nsort\ncircle\nrectangle\nmove\nremove");
     }
 
     public void start() {
@@ -30,6 +31,9 @@ public class GeometricTI {
                 break;
             case "circle":
                 circle();
+                break;
+            case "sort":
+                sort();
                 break;
             case "rectangle":
                 rectangle();
@@ -162,8 +166,38 @@ public class GeometricTI {
     }
 
     private void sort() {
-        char c;
-        // TODO: Implement function
+        if (shapes.size() < 1) {
+            System.out.println("The array is empty. You can't sort an empty array.");
+        } else if (shapes.size() == 1) {
+            System.out.println("The array only has one entry, sorting wil have no effect.");
+        } else {
+            System.out.println("Sort by:\nx values: x\ny values: y\narea: a");
+            String input = scanner.next();
+            parseSort(input);
+        }
+
+        start();
+    }
+
+    private void parseSort(String input) {
+        if (!input.equals("")) {
+            if (input.charAt(0) == 'x') {
+                // TODO: Implement sorter
+                System.out.println("Sorted by x values");
+            } else if (input.charAt(0) == 'y') {
+                // TODO: Implement sorter
+                System.out.println("Sorted by y values");
+
+            } else {
+                shapes = sorter.sortByArea(shapes);
+                System.out.println("Sorted by Area.");
+            }
+        } else {
+            shapes = sorter.sortByArea(shapes);
+            System.out.println("Sorted by Area.");
+        }
+        printEntries();
+
     }
 
 }

@@ -1,6 +1,7 @@
 package geometric;
 
-public class Circle implements Geometric {
+
+public class Circle implements Geometric, Comparable<Geometric> {
     private double x, y, r;
 
     public Circle(double x, double y, double r) {
@@ -48,5 +49,22 @@ public class Circle implements Geometric {
     public double getYval() {
         return y;
     }
+
+    @Override
+    public int compareTo(Geometric g) {
+
+        double o1 = area();
+        double o2 = g.area();
+
+        if (o1 < o2) {
+            return -1;
+        } else if (o2 > o1) {
+            return 1;
+        }
+        return 0;
+
+    }
+
+    
 
 }

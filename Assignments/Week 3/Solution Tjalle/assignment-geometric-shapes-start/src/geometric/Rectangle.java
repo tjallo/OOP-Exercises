@@ -1,6 +1,6 @@
 package geometric;
 
-public class Rectangle implements Geometric {
+public class Rectangle implements Geometric, Comparable<Geometric> {
     private double x, y, width, height;
 
     public Rectangle(double x, double y, double width, double height) {
@@ -48,6 +48,21 @@ public class Rectangle implements Geometric {
 
     public double getYval() {
         return y;
+    }
+
+    @Override
+    public int compareTo(Geometric g) {
+
+        double o1 = area();
+        double o2 = g.area();
+
+        if (o1 < o2) {
+            return -1;
+        } else if (o2 > o1) {
+            return 1;
+        }
+        return 0;
+
     }
 
 }
