@@ -58,9 +58,13 @@ public class Assignment03Tester {
 	}
 
 	public void sortByX() {
+		GeometricXComparator comparator = new GeometricXComparator();
+		Arrays.sort(shapes, comparator);
 	}
 
 	public void sortByY() {
+		GeometricYComparator comparator = new GeometricYComparator();
+		Arrays.sort(shapes, comparator);
 	}
 
 	private void addToArray(Geometric g) {

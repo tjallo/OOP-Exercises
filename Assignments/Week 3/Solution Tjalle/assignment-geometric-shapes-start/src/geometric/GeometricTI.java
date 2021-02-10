@@ -198,10 +198,12 @@ public class GeometricTI {
     private void parseSort(String input) {
         if (!input.equals("")) {
             if (input.charAt(0) == 'x') {
-                // TODO: Implement sorter
+                GeometricXComparator comparator = new GeometricXComparator();
+                Arrays.sort(shapes, comparator);
                 System.out.println("Sorted by x values");
             } else if (input.charAt(0) == 'y') {
-                // TODO: Implement sorter
+                GeometricYComparator comparator = new GeometricYComparator();
+                Arrays.sort(shapes, comparator);
                 System.out.println("Sorted by y values");
 
             } else {
