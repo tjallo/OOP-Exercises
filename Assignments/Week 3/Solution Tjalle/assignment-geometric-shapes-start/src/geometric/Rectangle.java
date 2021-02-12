@@ -37,7 +37,7 @@ public class Rectangle implements Geometric, Comparable<Geometric> {
 
     @Override
     public String toString() {
-        return "Type: Rectangle, xPos: " + Double.toString(x) + ", yPos: " + Double.toString(y) + ", Width: "
+        return "Type: Rectangle, xPos: " + Double.toString(leftBorder()) + ", yPos: " + Double.toString(bottomBorder()) + ", Width: "
                 + Double.toString(width) + ", Heigth: " + Double.toString(height) + ", Area: "
                 + Double.toString(area());
     }

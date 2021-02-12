@@ -38,7 +38,7 @@ public class Circle implements Geometric, Comparable<Geometric> {
 
     @Override
     public String toString() {
-        return "Type: Circle, xPos: " + Double.toString(x) + ", yPos: " + Double.toString(y) + ", Radius: "
+        return "Type: Circle, xPos: " + Double.toString(leftBorder()) + ", yPos: " + Double.toString(bottomBorder()) + ", Radius: "
                 + Double.toString(r) + ", Area: " + Double.toString(area());
     }
 
