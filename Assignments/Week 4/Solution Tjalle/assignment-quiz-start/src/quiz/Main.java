@@ -4,12 +4,9 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		Question q = new MultipleChoiceQuestion("What is the complexity of making pancakes?",
-				new String[] { "O(N)", "O(log N)", "O(N log N)" }, 1, 4);
+		Question q = new ThisThatQuestion("Are you hungry?", "yes", "no", 0, 1);
 
-		System.out.println(q.toString());
-
-		System.out.println("What is the complexity of making pancakes?\na) O(N)\nb) O(log N)\nc) O(N log N)\n");
+		System.out.println(q.isCorrect("yes"));
 	}
 
 }

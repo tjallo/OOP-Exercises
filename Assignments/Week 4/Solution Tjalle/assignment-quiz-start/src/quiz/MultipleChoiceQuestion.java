@@ -2,7 +2,7 @@ package quiz;
 
 public class MultipleChoiceQuestion extends Question {
 
-    private String[] answers;
+    protected String[] answers;
     private String answerLetter;
 
     public MultipleChoiceQuestion(String question, String[] answers, int correctAnswer, int score) {

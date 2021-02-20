@@ -2,8 +2,8 @@ package quiz;
 
 public class Question {
 
-    private String question;
-    private String correctAnswer;
+    protected String question;
+    protected String correctAnswer;
     private int score;
 
     public Question(String question, String answer) {
@@ -34,4 +34,5 @@ public class Question {
     public int getScore() {
         return score;
     }
+
 }
