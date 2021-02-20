@@ -15,7 +15,7 @@ public class Question {
     public Question(String question, String answer, int score) {
         this.question = question;
         this.correctAnswer = answer;
-        if (score >= 0 && score <= 6) {
+        if (score >= 0 && score <= 5) {
             this.score = score;
         } else {
             this.score = 3;
