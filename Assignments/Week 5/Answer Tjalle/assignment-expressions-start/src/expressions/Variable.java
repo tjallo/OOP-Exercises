@@ -13,6 +13,13 @@ public class Variable extends NoArgExpr{
     public String toString() {
         return name;
     }
+
+    @Override
+    public double eval(Map<String, Double> env) {
+        return env.get(name);
+    }
+
+    
     
    
 }

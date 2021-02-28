@@ -7,7 +7,19 @@ public class Add extends TwoArgExpr {
     }
 
     private static Expression partialEvalAdd(Expression x, Expression y) {
-        return x;
+        if (x.getClass().equals(Constant.class) && y.getClass().equals(Constant.class)) {
+            Expression c = new Constant(Double.parseDouble(x.toString()) + Double.parseDouble(y.toString()));
+            return c;
+        }
+
+        if (x.getClass().equals(Constant.class) && Double.parseDouble(x.toString()) == 0){
+            return y;
+        }
+        if (y.getClass().equals(Constant.class) && Double.parseDouble(y.toString()) == 0){
+            return x;
+        }
+
+        return new Add(x, y);
     }
 
     @Override

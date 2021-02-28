@@ -7,7 +7,19 @@ public class Multiply extends TwoArgExpr {
     }
 
     private static Expression partialEvalMul(Expression x, Expression y) {
-        return x;
+        if (x.getClass().equals(Constant.class) && y.getClass().equals(Constant.class)) {
+            Expression c = new Constant(Double.parseDouble(x.toString()) * Double.parseDouble(y.toString()));
+            return c;
+        }
+
+        if (x.getClass().equals(Constant.class) && Double.parseDouble(x.toString()) == 0) {
+            return new Constant(0.0);
+        }
+        if (y.getClass().equals(Constant.class) && Double.parseDouble(y.toString()) == 0) {
+            return new Constant(0.0);
+        }
+
+        return new Multiply(x, y);
     }
 
     @Override

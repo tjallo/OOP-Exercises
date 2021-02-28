@@ -1,6 +1,5 @@
 package expressions;
 
-import org.graalvm.compiler.core.common.type.ArithmeticOpTable.BinaryOp.Mul;
 
 public class ExpressionFactory {
 

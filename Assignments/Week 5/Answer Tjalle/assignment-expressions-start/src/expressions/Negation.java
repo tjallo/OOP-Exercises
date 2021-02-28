@@ -10,14 +10,12 @@ public class Negation extends OneArgExpr {
 
     @Override
     public double eval(Map<String, Double> env) {
-        // TODO Auto-generated method stub
-        return 0;
+        return x.eval(env) * -1;
     }
 
     @Override
     public Expression partialEval() {
-        // TODO Auto-generated method stub
-        return null;
+        return new Constant(Double.parseDouble(x.toString()) * -1);
     }
 
     @Override
@@ -25,8 +23,4 @@ public class Negation extends OneArgExpr {
         return "-";
     }
 
-    
-
-    
-    
 }
