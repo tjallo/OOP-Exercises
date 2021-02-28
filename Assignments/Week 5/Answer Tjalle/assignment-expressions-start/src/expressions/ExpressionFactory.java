@@ -1,24 +1,26 @@
 package expressions;
 
+import org.graalvm.compiler.core.common.type.ArithmeticOpTable.BinaryOp.Mul;
+
 public class ExpressionFactory {
 
 	public static Expression var(String x) {
-		return null;
+		return new Variable(x);
 	}
 
 	public static Expression con(Double x) {
-		return null;
+		return new Constant(x);
 	}
 
 	public static Expression add(Expression x, Expression y) {
-		return null;
+		return new Add(x, y);
 	}
 
 	public static Expression mul(Expression x, Expression y) {
-		return null;
+		return new Multiply(x, y);
 	}
 
 	public static Expression neg(Expression x) {
-		return null;
+		return new Negation(x);
 	}
 }
