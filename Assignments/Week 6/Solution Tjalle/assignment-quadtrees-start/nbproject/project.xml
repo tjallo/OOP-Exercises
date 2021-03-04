@@ -3,12 +3,12 @@
     <type>org.netbeans.modules.java.j2seproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/j2se-project/3">
-            <name>Lecture6-recursive</name>
+            <name>assignment-quadtrees-start</name>
             <source-roots>
-                <root id="src.dir"/>
+                <root id="src.dir" name="src"/>
             </source-roots>
             <test-roots>
-                <root id="test.src.dir"/>
+                <root id="test.test.dir"/>
             </test-roots>
         </data>
     </configuration>

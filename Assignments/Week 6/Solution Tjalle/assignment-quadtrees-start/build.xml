@@ -7,8 +7,8 @@
 <!-- the Compile on Save feature is turned off for the project. -->
 <!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
 <!-- in the project's Project Properties dialog box.-->
-<project name="Lecture6-recursive" default="default" basedir=".">
-    <description>Builds, tests, and runs the project Lecture6-recursive.</description>
+<project name="assignment-quadtrees-start" default="default" basedir=".">
+    <description>Builds, tests, and runs the project assignment-quadtrees-start.</description>
     <import file="nbproject/build-impl.xml"/>
     <!--
 
@@ -58,7 +58,7 @@
 
     An example of overriding the target for project execution could look like this:
 
-        <target name="run" depends="Lecture6-recursive-impl.jar">
+        <target name="run" depends="assignment-quadtrees-start-impl.jar">
             <exec dir="bin" executable="launcher.exe">
                 <arg file="${dist.jar}"/>
             </exec>
