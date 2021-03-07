@@ -1,5 +1,7 @@
 package quadtrees;
 
+import java.io.Reader;
+
 /**
  * Bitmap: A class for representing bitmap;
  */
@@ -84,6 +86,19 @@ public class Bitmap {
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
 				setBit(x + i, y + j, val);
+			}
+		}
+	}
+
+	public void fromString(String in) {
+		for (int w = 0; w < bmWidth; w++) {
+			for (int h = 0; h < bmHeight; h++) {
+				int c = Integer.parseInt(String.valueOf(in.charAt(w * bmWidth + h)));
+				boolean val = false;
+				if (c == 1) {
+					val = true;
+				}
+				setBit(w, h, val);
 			}
 		}
 	}
