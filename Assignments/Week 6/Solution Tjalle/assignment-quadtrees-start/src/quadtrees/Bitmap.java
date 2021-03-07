@@ -1,6 +1,5 @@
 package quadtrees;
 
-import java.io.Reader;
 
 /**
  * Bitmap: A class for representing bitmap;

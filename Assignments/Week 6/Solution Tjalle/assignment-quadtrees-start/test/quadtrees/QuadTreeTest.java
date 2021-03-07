@@ -3,6 +3,7 @@ package quadtrees;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -60,47 +61,61 @@ public class QuadTreeTest {
 				"**OO\n" + //
 				"**OO\n", b4x4.toString());
 	}
-	
-	
+
 	@Test
-	public void writeAllBlack1x1() {
+	public void writeAllBlack1x1() throws IOException {
 		Bitmap b1x1 = new Bitmap(1, 1);
 		b1x1.fillArea(0, 0, 1, false);
 		QTree tree = new QTree(b1x1);
 		Writer w = new StringWriter();
-		tree.writeQTree(w);
+		try {
+			tree.writeQTree(w);
+		} catch (IOException ioException) {
+			ioException.printStackTrace();
+		}
 		assertEquals("O\n", b1x1.toString());
 		assertEquals("00", w.toString());
 	}
 
-	public void writeAllBlack4x4() {
+	public void writeAllBlack4x4() throws IOException {
 		Bitmap b4x4 = new Bitmap(4, 4);
 		b4x4.fillArea(0, 0, 4, false);
 		QTree tree = new QTree(b4x4);
 		Writer w = new StringWriter();
-		tree.writeQTree(w);
+		try {
+			tree.writeQTree(w);
+		} catch (IOException ioException) {
+			ioException.printStackTrace();
+		}
 		assertEquals("OOOO\n" + "OOOO\n" + "OOOO\n" + "OOOO\n", b4x4.toString());
 		assertEquals("00", w.toString());
 	}
 
-	
 	@Test
-	public void writeAllWhite1x1() {
+	public void writeAllWhite1x1() throws IOException {
 		Bitmap b1x1 = new Bitmap(1, 1);
 		b1x1.fillArea(0, 0, 1, true);
 		QTree tree = new QTree(b1x1);
 		Writer w = new StringWriter();
-		tree.writeQTree(w);
+		try {
+			tree.writeQTree(w);
+		} catch (IOException ioException) {
+			ioException.printStackTrace();
+		}
 		assertEquals("*\n", b1x1.toString());
 		assertEquals("01", w.toString());
 	}
 
-	public void writeAllWhite4x4() {
+	public void writeAllWhite4x4() throws IOException {
 		Bitmap b4x4 = new Bitmap(4, 4);
 		b4x4.fillArea(0, 0, 4, true);
 		QTree tree = new QTree(b4x4);
 		Writer w = new StringWriter();
-		tree.writeQTree(w);
+		try {
+			tree.writeQTree(w);
+		} catch (IOException ioException) {
+			ioException.printStackTrace();
+		}
 		assertEquals("****\n" + "****\n" + "****\n" + "****\n", b4x4.toString());
 		assertEquals("01", w.toString());
 	}
