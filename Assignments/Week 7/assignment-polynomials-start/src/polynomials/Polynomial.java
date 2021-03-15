@@ -149,6 +149,8 @@ public class Polynomial {
     public void divide(Polynomial b) {
         for (Term t1: terms ){
             for (Term t2: b.terms){
+                // Inverting the Term to allow for 'division by multiplication'
+                // e.g. m / (n^x) == m * ((1/n)^(-x))
                 Term inverted = new Term(1 / t2.getCoef(), t2.getExp() * -1);
                 t1.times(inverted);
             }
