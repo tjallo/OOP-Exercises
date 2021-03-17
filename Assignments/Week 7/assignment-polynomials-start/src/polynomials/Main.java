@@ -14,6 +14,8 @@ public class Main {
 
 		System.out.println(p3);
 		System.out.println(p3.evaluate(3));
+		System.out.println(p3);
+
 
 	}
 

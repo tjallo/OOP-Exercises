@@ -21,7 +21,7 @@ public class Polynomial {
      */
     public Polynomial() {
 
-        terms = new LinkedList<>();
+        terms = new ArrayList<>();
 
     }
 
@@ -32,7 +32,7 @@ public class Polynomial {
      *          scanner and passed to scanTerm for reading each individual term
      */
     public Polynomial(String s) {
-        terms = new LinkedList<>();
+        terms = new ArrayList<>();
         Scanner scan = new Scanner(s);
 
         for (Term t = Term.scanTerm(scan); t != null; t = Term.scanTerm(scan)) {
@@ -46,7 +46,7 @@ public class Polynomial {
      * @param p the copied polynomial
      */
     public Polynomial(Polynomial p) {
-        terms = new LinkedList<>();
+        terms = new ArrayList<>();
         for (Term t : p.terms) {
             terms.add(new Term(t));
         }
@@ -61,6 +61,7 @@ public class Polynomial {
      */
     @Override
     public String toString() {
+        removeZeroes();
 
         StringBuilder s = new StringBuilder();
 
@@ -72,6 +73,7 @@ public class Polynomial {
             Term t = terms.get(i);
             s.append(singleTermToValidString(t) + ' ');
         }
+
 
         return s.toString();
     }
@@ -116,7 +118,7 @@ public class Polynomial {
             }
         }
 
-
+        removeZeroes();
     }
 
 
@@ -133,28 +135,30 @@ public class Polynomial {
                 terms.add(inverted);
             }
         }
-
+        removeZeroes();
 
     }
 
     public void times(Polynomial b) {
 
-        for (Term t1: terms ){
-            for (Term t2: b.terms){
+        for (Term t1 : terms) {
+            for (Term t2 : b.terms) {
                 t1.times(t2);
             }
         }
+        removeZeroes();
     }
 
     public void divide(Polynomial b) {
-        for (Term t1: terms ){
-            for (Term t2: b.terms){
+        for (Term t1 : terms) {
+            for (Term t2 : b.terms) {
                 // Inverting the Term to allow for 'division by multiplication'
                 // e.g. m / (n^x) == m * ((1/n)^(-x))
                 Term inverted = new Term(1 / t2.getCoef(), t2.getExp() * -1);
                 t1.times(inverted);
             }
         }
+        removeZeroes();
     }
 
     @Override
@@ -165,13 +169,29 @@ public class Polynomial {
     public double evaluate(int x) {
         int result = 0;
 
-        for (Term t: terms) {
+        for (Term t : terms) {
             result += t.getCoef() * Math.pow(x, t.getExp());
         }
 
         return result;
     }
 
+    public void removeZeroes() {
+        // Maybe a bit inefficient to run every time, but since polynomials in this
+        // case aren't huge anyway, it is negligible
+
+        List<Term> newList = new ArrayList();
+        for (Term t : terms) {
+            double coef = t.getCoef();
+
+            if (coef <= -0.999 || coef >= 0.0001) {
+                newList.add(t);
+            }
+        }
+
+        terms = newList;
+
+    }
 
 
 }
