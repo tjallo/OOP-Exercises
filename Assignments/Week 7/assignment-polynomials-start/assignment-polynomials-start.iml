@@ -18,5 +18,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="org.hamcrest:hamcrest-core:1.3" level="application" />
   </component>
 </module>

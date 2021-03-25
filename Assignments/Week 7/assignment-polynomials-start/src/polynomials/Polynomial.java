@@ -137,6 +137,8 @@ public class Polynomial {
 
     public void times(Polynomial b) {
 
+        // TODO: Needs to be fixed, because now it doesn't do times properly
+
         for (Term t1 : terms) {
             for (Term t2 : b.terms) {
                 t1.times(t2);
