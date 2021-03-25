@@ -137,13 +137,15 @@ public class Polynomial {
 
     public void times(Polynomial b) {
 
-        // TODO: Needs to be fixed, because now it doesn't do times properly
+        List<Term> newTerms = new ArrayList<>();
 
         for (Term t1 : terms) {
             for (Term t2 : b.terms) {
-                t1.times(t2);
+                Term t = new Term(t1.getCoef() * t2.getCoef(), t1.getExp() + t2.getExp());
+                newTerms.add(t);
             }
         }
+        this.terms = newTerms;
         removeZeroes();
     }
 
@@ -163,20 +165,29 @@ public class Polynomial {
     }
 
     public void removeZeroes() {
-        // Maybe a bit inefficient to run every time, but since polynomials in this
-        // case aren't huge anyway, it is negligible
+        int biggestExp = 0;
 
-        List<Term> newList = new ArrayList<>();
-        for (Term t : terms) {
-            double coef = t.getCoef();
+        for (Term t : this.terms) {
+            if (t.getExp() > biggestExp)
+                biggestExp = t.getExp();
+        }
 
+        double[] doubles = new double[biggestExp + 1];
+        for (Term t : this.terms) {
+            doubles[t.getExp()] = doubles[t.getExp()] + t.getCoef();
+        }
+
+        List<Term> newTerms = new ArrayList<>();
+
+        for (int i = doubles.length - 1; i >= 0; i--) {
+            double coef = doubles[i];
             if (coef <= -0.999 || coef >= 0.0001) {
-                newList.add(t);
+                newTerms.add(new Term(coef, i));
             }
         }
 
-        terms = newList;
-
+        this.terms = newTerms;
     }
+
 
 }
