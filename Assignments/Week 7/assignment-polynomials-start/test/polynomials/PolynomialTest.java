@@ -134,7 +134,8 @@ public class PolynomialTest {
         b2.plus(c2);
         a2.plus(b2);
 
-        assertEquals(a1.toString(), a2.toString()); // (a * b) * c == a * (b * c)
+        assertEquals(a1.toString(), a2.toString()); 
+        // (a * b) * c == a * (b * c)
         a1 = new Polynomial("4 3 2 1");
         b1 = new Polynomial("6 5 4 3 2 1");
         c1 = new Polynomial("4 3 2 1 2 3 4 5");

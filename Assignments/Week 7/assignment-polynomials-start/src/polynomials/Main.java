@@ -4,9 +4,13 @@ public class Main {
 
     public static void main(String[] args) {
         Polynomial p1 = new Polynomial("3 4 -4 3 2 1 -8 0");
-        p1.times(p1);
-
-        System.out.print(p1.toString());
+		p1.times(p1);
+		
+        System.out.println(p1.toString());
+		
+        Polynomial p2 = new Polynomial("2 1 3 2");
+		System.out.println(p2);
+		System.out.println(p2.evaluate(3));
     }
 
     /*

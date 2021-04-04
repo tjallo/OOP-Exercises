@@ -166,8 +166,10 @@ public class Polynomial {
 
     public void removeZeroes() {
 
-        // I know this is completely unoptimized :) but I can not afford the spent any more time on this exercise...
-        // There is also probably a more clever trick than adding removeZeroes add the end of every function, oh well
+        // I know this is completely unoptimized :) but I can not afford the spent any
+        // more time on this exercise...
+        // There is also probably a more clever trick than adding removeZeroes add the
+        // end of every function, oh well
         int biggestExp = 0;
 
         for (Term t : this.terms) {
@@ -175,7 +177,8 @@ public class Polynomial {
                 biggestExp = t.getExp();
         }
 
-        // Array trick with exponents as index to add all coefs together without too much hassle
+        // Array trick with exponents as index to add all coefs together without too
+        // much hassle
         double[] doubles = new double[biggestExp + 1];
         for (Term t : this.terms) {
             doubles[t.getExp()] = doubles[t.getExp()] + t.getCoef();
@@ -192,6 +195,5 @@ public class Polynomial {
 
         this.terms = newTerms;
     }
-
 
 }
