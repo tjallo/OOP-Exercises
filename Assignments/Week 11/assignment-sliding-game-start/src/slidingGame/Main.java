@@ -11,14 +11,9 @@ public class Main {
 		int[] unsolvable2 = { 1, 3, 2, 4, 9, 5, 6, 7, 8 };
 
 		// To use this game, you have to change the game size to 5 in SlidingGame.
-		// breadth-first solver is not able to solve it, but best-first solver can solve it easily.
-		int[] game5x5 =
-			{  1,  2,  3,  4,  5
-			, 25,  7,  8,  9, 10
-			, 11, 12, 13, 14, 15
-			, 16, 17, 18, 19, 20
-			, 21, 22, 23, 24,  6
-			};
+		// breadth-first solver is not able to solve it, but best-first solver can solve
+		// it easily.
+		int[] game5x5 = { 1, 2, 3, 4, 5, 25, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 6 };
 
 		SlidingGame s = new SlidingGame(sevenSteps);
 		Solver solver = new Solver(s);

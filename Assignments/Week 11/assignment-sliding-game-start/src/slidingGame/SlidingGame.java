@@ -1,9 +1,7 @@
 package slidingGame;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * A template of a sliding game
@@ -17,7 +15,8 @@ public class SlidingGame implements Configuration {
 	 */
 	private int[][] board;
 	private int holeX, holeY;
-	private int manhattanDist = 1337;
+	private int mhtDist = 1337;
+	private Configuration predecessor;
 
 	/**
 	 * A constructor that initializes the board with the specified array
@@ -39,8 +38,24 @@ public class SlidingGame implements Configuration {
 		}
 	}
 
+	public int calculateManhattanDist() {
+		mhtDist = 0;
+		for (int x = 0; x < N; x++) {
+			for (int y = 0; y < N; y++) {
+				if (board[y][x] != HOLE) {
+					int finalY = (board[y][x] - 1) / N;
+					int finalX = (board[y][x] - 1) % N;
+
+					mhtDist += Math.abs(x - finalY);
+					mhtDist += Math.abs(y - finalX);
+				}
+			}
+		}
+		return mhtDist;
+	}
+
 	public int getManhattanDistance() {
-		return manhattanDist;
+		return calculateManhattanDist();
 	}
 
 	/**
@@ -51,40 +66,97 @@ public class SlidingGame implements Configuration {
 	 */
 	@Override
 	public String toString() {
-		StringBuilder buf = new StringBuilder();
-		for (int row = 0; row < N; row++) {
-			for (int col = 0; col < N; col++) {
-				int puzzel = board[col][row];
-				buf.append(puzzel == HOLE ? "  " : puzzel + " ");
+		StringBuilder bufBldr = new StringBuilder();
+		for (int x = 0; x < N; x++) {
+			for (int y = 0; y < N; y++) {
+				int puzzle = board[y][x];
+				bufBldr.append(puzzle == HOLE ? "  " : puzzle + " ");
 			}
-			buf.append("\n");
+			bufBldr.append("\n");
 		}
-		return buf.toString();
+		return bufBldr.toString();
 	}
 
 	@Override
 	public boolean equals(Object o) {
-		throw new UnsupportedOperationException("equals : not supported yet.");
+		if (o.getClass() == this.getClass()) {
+			SlidingGame a = (SlidingGame) o;
+			for (int x = 0; x < N; x++) {
+				for (int y = 0; y < N; y++) {
+					if (board[y][x] != a.board[y][x]) {
+						return false;
+					}
+				}
+			}
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
 	public boolean isSolution() {
-		throw new UnsupportedOperationException("isGoal : not supported yet.");
+		int expVal = 1;
+		for (int x = 0; x < N; x++) {
+			for (int y = 0; y < N; y++) {
+				if (board[y][x] != expVal) {
+					return false;
+				}
+				expVal += 1;
+			}
+		}
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		int hash = 0;
+		for (int x = N - 1; x >= 0; x--) {
+			for (int y = N - 1; y >= 0; y--) {
+				hash = 31 * hash + board[x][y];
+			}
+		}
+		return hash;
 	}
 
 	@Override
 	public Collection<Configuration> successors() {
-		throw new UnsupportedOperationException("successors : not supported yet.");
+		LinkedList<Configuration> linkedList = new LinkedList<>();
+		for (Direction d : Direction.values()) {
+			int newX = holeX + d.getDX();
+			int newY = holeY + d.getDY();
+			if (newX >= 0 && newX < N && newY >= 0 && newY < N) {
+				SlidingGame sldGame = new SlidingGame(this, d);
+				linkedList.add(sldGame);
+			}
+		}
+		return linkedList;
+	}
+
+	public SlidingGame(SlidingGame parent, Direction direction) {
+		predecessor = parent;
+		board = new int[N][N];
+		for (int x = 0; x < N; x++) {
+			for (int y = 0; y < N; y++) {
+				board[y][x] = parent.board[y][x];
+			}
+		}
+		holeX = parent.holeX + direction.getDX();
+		holeY = parent.holeY + direction.getDY();
+
+		board[parent.holeX][parent.holeY] = board[parent.holeX + direction.getDX()][parent.holeY + direction.getDY()];
+
+		board[holeX][holeY] = HOLE;
 	}
 
 	@Override
 	public int compareTo(Configuration g) {
-		throw new UnsupportedOperationException("compareTo : not supported yet.");
+		return calculateManhattanDist() - ((SlidingGame) g).calculateManhattanDist();
 	}
 
 	@Override
 	public Configuration getParent() {
-		throw new UnsupportedOperationException("parent: Not supported yet.");
+		return predecessor;
 	}
 
 }

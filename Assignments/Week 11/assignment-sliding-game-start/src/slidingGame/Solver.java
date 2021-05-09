@@ -13,7 +13,10 @@ public class Solver {
 	private Collection<Configuration> encountered;
 
 	public Solver(Configuration g) {
-		throw new UnsupportedOperationException("Solver: not supported yet.");
+		toExamine = new PriorityQueue<>();
+		encountered = new HashSet<>();
+		toExamine.add(g);
+		encountered.add(g);
 	}
 
 	/**
@@ -25,14 +28,26 @@ public class Solver {
 		while (!toExamine.isEmpty()) {
 			Configuration next = toExamine.remove();
 			if (next.isSolution()) {
-				return next.toString();
+				return printSolution(next);
 			} else {
 				for (Configuration succ : next.successors()) {
-					toExamine.add(succ);
+					if (!encountered.contains(succ)) {
+						toExamine.add(succ);
+						encountered.add(succ);
+					}
 				}
 			}
 		}
-		return "Failure!";
+		return "This is an unsolvable game";
+	}
+
+	public String printSolution(Configuration next) {
+		StringBuilder strBldr = new StringBuilder();
+		for (Configuration c : next.pathFromRoot()) {
+			strBldr.append(c);
+			strBldr.append('\n');
+		}
+		return strBldr.toString();
 	}
 
 }

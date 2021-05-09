@@ -1,9 +1,11 @@
 package slidingGame;
+
 /**
  * An interface for representing nodes in a state space.
  */
 
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 
 public interface Configuration extends Comparable<Configuration> {
@@ -24,7 +26,7 @@ public interface Configuration extends Comparable<Configuration> {
 
 	/**
 	 * For marking final / solution configurations.
-	 * 
+	 *
 	 * @return true if a this is a solution, false otherwise
 	 */
 	public abstract boolean isSolution();
@@ -35,6 +37,13 @@ public interface Configuration extends Comparable<Configuration> {
 	 * @return a list of successive configurations from the root to 'this'
 	 */
 	public default List<Configuration> pathFromRoot() {
-		throw new UnsupportedOperationException("pathFromRoot: not supported yet.");
+		List<Configuration> list = new LinkedList<>();
+		list.add(this);
+		Configuration parent = this.getParent();
+		while (parent != null) {
+			list.add(0, parent);
+			parent = parent.getParent();
+		}
+		return list;
 	}
 }
