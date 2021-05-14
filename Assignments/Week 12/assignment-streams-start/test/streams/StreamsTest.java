@@ -28,8 +28,7 @@ public class StreamsTest {
     @Test
     public void multiplyNumbers() {
         // Use streams and lambdas to multiply the 5 biggest digits of PI
-        // We couldn't find out how to do this properly...
-        int result = (int) Math.pow(9, 5);
+        int result = Stream.of(PI).sorted((l,r)  -> r-l).limit(5).reduce(1,(l,r) -> l*r);
         assertEquals(59049, result);
     }
 
