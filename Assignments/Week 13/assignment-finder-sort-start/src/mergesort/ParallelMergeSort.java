@@ -4,26 +4,26 @@ import java.util.Arrays;
 
 public class ParallelMergeSort {
 
-    public static void sort(int[] array) {
-        final int treshold = 2500;
+    public static void sort(int[] array, int treshold) {
+        // final int treshold = 100000;
 
         // Sequential Sort
         if (array.length < treshold && array.length > 1) {
             int[] firstHalf = Arrays.copyOf(array, array.length / 2);
-            sort(firstHalf);
+            sort(firstHalf, treshold);
             int[] secondHalf = Arrays.copyOfRange(array, array.length / 2, array.length);
-            sort(secondHalf);
+            sort(secondHalf, treshold);
             merge(firstHalf, secondHalf, array);
         } else if (array.length > 1) {
             int[] firstHalf = Arrays.copyOf(array, array.length / 2);
             int[] secondHalf = Arrays.copyOfRange(array, array.length / 2, array.length);
 
             Runnable half1 = () -> {
-                sort(firstHalf);
+                sort(firstHalf, treshold);
             };
 
             Runnable half2 = () -> {
-                sort(secondHalf);
+                sort(secondHalf, treshold);
             };
             Thread thread1 = new Thread(half1);
             Thread thread2 = new Thread(half2);
