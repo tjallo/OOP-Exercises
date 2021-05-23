@@ -22,8 +22,9 @@ public class Main {
    * 
    * sequential sort: 2096 millis. Array is sorted = true
    * 
-   * parrallel sort: 648 millis. Array is sorted = true sorter arrays equals =
-   * true
+   * parrallel sort: 648 millis. Array is sorted = true
+   * 
+   * sorter arrays equals = true
    * 
    * The number of processors is 12
    */
