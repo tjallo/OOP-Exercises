@@ -15,6 +15,9 @@ public class Main {
    * 12 Cores Available (I assume Java only sees threads, not logical cores, I
    * know for a fact that I have 6 cores / 12 threads)
    * 
+   * sequential sort: 2094 millis. Array is sorted = true
+   * 
+   * parrallel sort: 2420 millis. Array is sorted = true
    */
 
   private static final int L = 10000000;

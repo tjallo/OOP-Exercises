@@ -17,6 +17,33 @@ public class ParallelMergeSort implements Runnable {
         } else if (array.length > 1) {
             int[] firstHalf = Arrays.copyOf(array, array.length / 2);
             int[] secondHalf = Arrays.copyOfRange(array, array.length / 2, array.length);
+
+            Runnable half1 = () -> {
+                sort(firstHalf);
+            };
+
+            Runnable half2 = () -> {
+                sort(secondHalf);
+            };
+            Thread thread1 = new Thread(half1);
+            Thread thread2 = new Thread(half2);
+            thread1.start();
+            thread2.start();
+
+            try {
+                thread1.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                thread2.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            merge(firstHalf, secondHalf, array);
+
         }
 
     };
@@ -43,9 +70,4 @@ public class ParallelMergeSort implements Runnable {
             dest[destIndex++] = part2[part2Index++];
     }
 
-    @Override
-    public void run() {
-        // TODO Auto-generated method stub
-
-    }
 }
