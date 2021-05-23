@@ -2,7 +2,7 @@ package mergesort;
 
 import java.util.Arrays;
 
-public class ParallelMergeSort implements Runnable {
+public class ParallelMergeSort {
 
     public static void sort(int[] array) {
         final int treshold = 2500;
