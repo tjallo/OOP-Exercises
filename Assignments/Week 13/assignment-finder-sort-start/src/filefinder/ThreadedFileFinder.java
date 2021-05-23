@@ -32,7 +32,8 @@ public class ThreadedFileFinder implements Runnable {
                     System.out.println("Found at: " + file.getAbsolutePath());
                 } else if (file.isDirectory()) {
                     ThreadedFileFinder f = new ThreadedFileFinder(file, fileName);
-                    f.run();
+                    Thread t = new Thread(f);
+                    t.start();
                 }
             }
         }
