@@ -1,5 +1,9 @@
 package taxi;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
 public class Simulation {
 
 	/**
@@ -23,13 +27,6 @@ public class Simulation {
 	private final Station station;
 
 	/**
-	 * hasEnded: is the simulation finished? nextTaxi: number of the taxi to be use
-	 * in next step
-	 */
-	private boolean hasEnded = false;
-	private int nextTaxi = 0;
-
-	/**
 	 * Constructor: create station and small and large taxis
 	 */
 	public Simulation() {
@@ -42,31 +39,29 @@ public class Simulation {
 		train = new Train(station);
 	}
 
-	/**
-	 * simulation step: if there are passengers load them in a taxi, otherwise let a
-	 * train bring new passengers, or indicate that simulation stops
-	 */
-	private void step() {
-		if (station.waitingPassengers() > 0) {
-			taxis[nextTaxi].takePassengers();
-			nextTaxi = (nextTaxi + 1) % NR_OF_TAXIS;
-		} else if (train.getNrOfTrips() < TRAIN_TRIPS) {
-			train.loadPassengers(Util.getRandomNumber(MIN_TRAVELLERS, MAX_TRAVELLERS));
-			train.unloadPassengers();
-		} else {
-			train.closeStation();
-			hasEnded = true;
+	void awaitTermination(ExecutorService exec) {
+		exec.shutdown();
+		try {
+			if (!exec.awaitTermination(1, TimeUnit.MINUTES)) {
+				exec.shutdownNow();
+				if (!exec.awaitTermination(1, TimeUnit.MINUTES)) {
+					System.err.println("Executor did not terminate");
+				}
+			}
+		} catch (InterruptedException e) {
+			exec.shutdownNow();
+			Thread.currentThread().interrupt();
 		}
 	}
 
 	public void start() {
-		while (!ended()) {
-			step();
-		}
-	}
 
-	private boolean ended() {
-		return hasEnded;
+		ExecutorService exec = Executors.newCachedThreadPool();
+		exec.execute(train);
+		for (Taxi taxi : taxis) {
+			exec.execute(taxi);
+		}
+		awaitTermination(exec);
 	}
 
 	public void showStatistics() {
