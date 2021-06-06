@@ -5,34 +5,33 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class Register {
 
-	// Make sure that CONVEYOR_SIZE + BIN_SIZE >= Customer.MAX_ITEMS, otherwise
-	// danger of deadlock
 	private static final int CONVEYER_SIZE = 10, BIN_SIZE = 10;
+	private ConveyorBelt<Item> conveyorBelt;
+	private ConveyorBelt<Item> conveyorBin;
+	private Lock lock;
 
-	private final Lock lock = new ReentrantLock();
-
-	private final ConveyorBelt onBelt, outBin;
-
-	public Register() {
-		onBelt = new ConveyorBelt(CONVEYER_SIZE);
-		outBin = new ConveyorBelt(BIN_SIZE);
-		
+	public Register (){
+		this.conveyorBelt = new ConveyorBelt(CONVEYER_SIZE);
+		this.conveyorBin = new ConveyorBelt(BIN_SIZE);
+		this.lock = new ReentrantLock();
 	}
 
+
 	public void putOnBelt(Item article) throws InterruptedException {
-		onBelt.putIn(article);
+		conveyorBelt.putIn(article);
+
 	}
 
 	public Item removeFromBelt() throws InterruptedException {
-		return (Item) outBin.removeFrom();
+		return conveyorBelt.removeFrom();
 	}
 
 	public void putInBin(Item article) throws InterruptedException {
-		outBin.putIn(article);
+		conveyorBin.putIn(article);
 	}
 
 	public Item removeFromBin() throws InterruptedException {
-		return (Item) outBin.removeFrom();
+		return conveyorBin.removeFrom();
 	}
 
 	public void claim() {

@@ -11,7 +11,7 @@ public class Customer implements Callable<Integer> {
 	private final int customerNumber;
 	private final int numberOfItemsWanted;
 	private final static Random GENERATOR = new Random();
-
+	
 	public int getNumberOfItemsWanted() {
 		return numberOfItemsWanted;
 	}
@@ -24,28 +24,23 @@ public class Customer implements Callable<Integer> {
 
 	@Override
 	public Integer call() {
-		int numberOfItemsBought = 0;
-		List<Item> wanted = store.getItems(numberOfItemsWanted);
-
-		final int registerNumber = GENERATOR.nextInt(store.NUMBER_OF_CHECKOUTS);
-		Register register = store.claimRegister(registerNumber);
-		register.claim();
-
 		try {
-			for (Item i : wanted) {
-				register.putOnBelt(i);
+			List<Item> wantedList = store.getItems(numberOfItemsWanted);
+			Register register = store.claimRegister(new Random().nextInt(Store.NUMBER_OF_CHECKOUTS));
+			register.claim();
+			int numberOfItemsBought = 0;
+			for (Item item : wantedList) {
+				register.putOnBelt(item);
 			}
-
-			while (register.removeFromBin() != null) {
+			register.putOnBelt(null);
+			while (register.removeFromBin() != null){
 				numberOfItemsBought++;
 			}
-		} catch (InterruptedException e) {
-			numberOfItemsBought = 0;
-			e.printStackTrace();
+			register.free();
+			return numberOfItemsBought;
 		}
-		register.free();
-
-		return numberOfItemsBought;
-
+		catch (InterruptedException interruptedException){
+			return 0;
+		}
 	}
 }
